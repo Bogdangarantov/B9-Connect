@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #000000, #c89116);
+
+}
+*{
+    font-family: 'K2D', sans-serif;
+    transition: 1s ease;
+}
+.logo-container{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    padding-top: 7vh;
+}
+.login-logo{
+    color: #C89116;
+    background-color: rgba(0, 0, 0, 0.55);
+    border-radius: 50px;
+    padding: 3vh 3vw 3vh 3vw;
+}
+.yellow{
+    color: #C89116;
+}
+.fade-in-from-bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: transparent;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: fade-in-from-bottom 1s ease-out;
+}
+
+@keyframes fade-in-from-bottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.form-title{
+    padding-bottom: 3rem;
+}
+.login-container{
+    padding-top: 12vh;
+}
+
+.login-form {
+    background-color: rgba(0, 0, 0, 0.55);
+    padding: 30px;
+    width: 30rem;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border-radius: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-form h2 {
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.user-icon{
+    font-size: 30px;
+    padding-left: 0.2rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+.show-pass{
+    position: relative;
+    font-size: 30px;
+    color: rgba(255, 255, 255, 0.6);
+}
+.show-pass:hover{
+    color: white;
+}
+.form-input{
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    background-color: rgba(175, 139, 10, 0.52);
+    border-radius: 50px;
+    margin-bottom: 1rem;
+}
+.form-input input{
+    background-color: transparent;
+    border: 0 solid transparent;
+    margin-left: 0.4rem;
+    width: 100%;
+    font-size: 23px;
+    color:rgba(255, 255, 255, 0.7);
+}
+input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.46);
+    font-size: 23px;
+    font-weight: normal;
+}
+input[type="password"]::placeholder {
+    color: rgba(255, 255, 255, 0.46);
+    font-size: 23px;
+    font-weight: normal;
+}
+
+input:focus-visible, input:focus{
+    border: 0px solid transparent;
+    outline: none;
+}
+.icon-col{
+
+}
+
+.login-button{
+    justify-content: center;
+    display: flex;
+}
+.login-button button{
+    width: 25rem;
+    border: 0 solid transparent;
+    border-radius: 40px;
+    background-color: #EDBB0B;
+    color: white;
+    padding: 0.4rem;
+    font-size: 30px
+}
+.error-message{
+    padding-top: 2rem;
+    font-size: 30px!important;
+    color: white;
+}

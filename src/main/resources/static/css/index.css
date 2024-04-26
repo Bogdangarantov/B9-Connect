@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #000000, #c89116);
+
+}
+*{
+    font-family: 'K2D', sans-serif;
+    transition: 1s ease;
+}
+.logo{
+    width: 14rem;
+}
+
+.nav-item-custom{
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: rgba(0, 0, 0, 0.48);
+    border-radius: 50px;
+    margin: 0.3rem;
+
+}
+.nav-item-custom a{
+    color: white;
+    font-family: "K2D",sans-serif;
+
+}
+.nav-item-custom:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.my-cab{
+    font-size: 40px;
+    color:rgba(0, 0, 0, 0.48) ;
+}
+.full-page-logo{
+    padding: 12rem;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    height: 100%;
+}
+.full-page-logo-text{
+    font-weight: 400;
+    font-size: 240px;
+    background-color: #EDBB0B;
+    /*background-color: #565656;*/
+    color: transparent;
+    text-shadow: 5px 0px 15px rgba(0, 0, 0, 0.5);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+}
