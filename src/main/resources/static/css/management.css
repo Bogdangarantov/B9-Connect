@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #000000, #c89116);
+
+}
+
+* {
+    font-family: 'K2D', sans-serif;
+    transition: 1s ease;
+}
+
+.logo {
+    width: 14rem;
+}
+
+.nav-item-custom {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: rgba(0, 0, 0, 0.48);
+    border-radius: 50px;
+    margin: 0.3rem;
+
+}
+
+.nav-item-custom a {
+    color: white;
+    font-family: "K2D", sans-serif;
+
+}
+
+.nav-item-custom:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.my-cab {
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.48);
+}
+
+.dropdown-menu[data-bs-popper] {
+    left: -8rem !important;
+}
+
+.create-user-container {
+    justify-content: center;
+    display: flex;
+}
+
+.create-user-content {
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: #EDAE0B;
+}
+
+.new-user-input {
+    padding-left: 1rem;
+    border-radius: 10px;
+    background-color: #9B7113;
+    border: 0 solid transparent;
+}
+
+.new-user-input::placeholder {
+    color: white;
+}
+
+.mb-3 {
+    justify-content: center;
+    display: flex;
+}
+
+.create-user-button {
+    width: 10rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: 0 solid transparent;
+    border-radius: 10px ;
+}
+.create-user-button:active{
+    transform: translate(0,2px) ;
+    transition: 0.1s ease;
+}
+.block-user-container {
+    justify-content: center;
+    display: flex;
+}
+.block-user-content{
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: #EDAE0B;
+}
+.unblock-user-content{
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: #EDAE0B;
+}
+[v-cloak] {
+    display: none;
+}

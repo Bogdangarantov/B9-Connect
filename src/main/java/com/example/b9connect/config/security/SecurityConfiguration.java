@@ -37,8 +37,11 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/css/**", "/js/**", "/img/**")
                         .permitAll()
-                        .requestMatchers(HttpMethod.GET,  "/")
+                        .requestMatchers(HttpMethod.GET,  "/","/services","/api/v1/services/**","/api/v1/users/**")
                         .authenticated()
+                        .requestMatchers(HttpMethod.GET,"/management")
+                        .hasAnyAuthority(UserRole.MANAGER.name())
+
                 )
                 .formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/", true))
                 .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())

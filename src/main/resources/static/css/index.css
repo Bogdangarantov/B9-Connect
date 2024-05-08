@@ -38,14 +38,16 @@ body {
     display: flex;
     height: 100%;
 }
+.dropdown-menu[data-bs-popper]{
+    left: -8rem!important;
+}
 .full-page-logo-text{
     font-weight: 400;
-    font-size: 240px;
+    font-size: 17vw;
     background-color: #EDBB0B;
     /*background-color: #565656;*/
     color: transparent;
     text-shadow: 5px 0px 15px rgba(0, 0, 0, 0.5);
     -webkit-background-clip: text;
-    -moz-background-clip: text;
     background-clip: text;
 }

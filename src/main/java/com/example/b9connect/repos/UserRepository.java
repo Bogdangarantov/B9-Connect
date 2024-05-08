@@ -14,4 +14,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("Select u FROM User u join fetch u.roles where u.login = :login")
     Optional<User> findUserByLogin(String login);
 
+    @Query("SELECT u FROM User u where u.enabled = true")
+    Set<User> getAll();
+
+
 }

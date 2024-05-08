@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #000000, #c89116);
+
+}
+*{
+    font-family: 'K2D', sans-serif;
+    transition: 1s ease;
+}
+.logo{
+    width: 14rem;
+}
+
+.nav-item-custom{
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: rgba(0, 0, 0, 0.48);
+    border-radius: 50px;
+    margin: 0.3rem;
+
+}
+.nav-item-custom a{
+    color: white;
+    font-family: "K2D",sans-serif;
+
+}
+.nav-item-custom:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.my-cab{
+    font-size: 40px;
+    color:rgba(0, 0, 0, 0.48) ;
+}
+.dropdown-menu[data-bs-popper]{
+    left: -8rem!important;
+}
+.services-title{
+    text-align: center;
+}
+.services-title h1{
+    font-weight: 400;
+    font-size: 6vw;
+    background-color: #EDBB0B;
+    /*background-color: #565656;*/
+    color: transparent;
+    text-shadow: 5px 0px 15px rgba(0, 0, 0, 0.5);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+.list-group{
+    text-align: center;
+}
+.list-group-item{
+    border: 0 solid transparent!important;
+    background-color: transparent!important;
+}
+.service{
+    min-width: 12rem;
+    margin-left: 6rem!important;
+    margin-top: 6rem!important;
+    margin-right: 6rem!important;
+    border-radius: 30px!important;
+    background-color: rgba(182, 140, 32, 0.5)!important;
+    box-shadow: -24px 20px #0000003b;
+}
+.service-title{
+    font-weight: 400;
+    font-size: 3vw;
+    background-color: #EDBB0B!important;
+    color: transparent!important;
+    text-shadow: 5px 0px 15px rgba(0, 0, 0, 0.5)!important;
+    -webkit-background-clip: text!important;
+    background-clip: text;
+}
+.service-btn{
+    width: 15rem;
+    margin: 3rem auto 1rem;
+    border-radius: 15px!important;
+    background-color: rgba(255, 184, 0, 0.33)!important;
+}
+.service-btn:active{
+    transform: translate(0,2px);
+}

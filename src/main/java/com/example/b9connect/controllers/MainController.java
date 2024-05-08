@@ -12,13 +12,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     private final Gson gson;
+
     @GetMapping("/login")
     public String login() {
         return "login";
     }
+
     @GetMapping("/")
     public String index(Authentication authentication, Model model) {
         model.addAttribute("user", gson.toJson(authentication.getPrincipal()));
         return "index";
+    }
+
+    @GetMapping("/management")
+    public String management(Authentication authentication, Model model) {
+        model.addAttribute("user", gson.toJson(authentication.getPrincipal()));
+        return "management";
+    }
+    @GetMapping("/services")
+    public String services(Authentication authentication, Model model) {
+        model.addAttribute("user", gson.toJson(authentication.getPrincipal()));
+        return "services";
     }
 }
