@@ -8,7 +8,8 @@ let app = new Vue({
         faq:[],
         newTicket :{
             name:"",
-            description:""
+            problem:"",
+            service_id:""
         }
     },
     methods:{
@@ -24,10 +25,14 @@ let app = new Vue({
             user.value =""
         },
         async sendTIcket(e){
+            let link = new URLSearchParams(window.location.search)
             e.preventDefault()
+            this.newTicket.service_id = link.get("service_id")
+            console.log(this.newTicket)
             let response = await fetch('/api/v1/services/ticket', {
                 method: 'POST',
                 headers: {
+                    'Content-type':"application/json",
                     'X-XSRF-TOKEN': this.cookieValue
                 },
                 body:JSON.stringify(this.newTicket)

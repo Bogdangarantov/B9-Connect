@@ -157,4 +157,22 @@ ALTER TABLE IF EXISTS public.services_users
         ON DELETE NO ACTION
         NOT VALID;
 
+
+CREATE OR REPLACE FUNCTION add_created_and_modified()
+    RETURNS TRIGGER AS
+$$
+BEGIN
+    NEW.created = NOW();
+    NEW.modified = NOW();
+    RETURN NEW;
 END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER before_insert_trigger
+    BEFORE INSERT
+    ON tickets
+    FOR EACH ROW
+EXECUTE FUNCTION add_created_and_modified();
+
+END;
+

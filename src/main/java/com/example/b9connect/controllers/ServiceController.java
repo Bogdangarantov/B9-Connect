@@ -1,5 +1,6 @@
 package com.example.b9connect.controllers;
 
+import com.example.b9connect.dto.TicketTO;
 import com.example.b9connect.entities.Service;
 import com.example.b9connect.entities.Ticket;
 import com.example.b9connect.entities.User;
@@ -37,7 +38,8 @@ public class ServiceController {
     }
     @PostMapping("/api/v1/services/ticket")
     @ResponseStatus(HttpStatus.OK)
-    public Ticket addTicket(@RequestBody Ticket ticket) {
-        return ticketService.addTicket(ticket);
+    public TicketTO addTicket(@RequestBody TicketTO ticketTO, Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        return ticketService.addTicket(ticketTO,user);
     }
 }

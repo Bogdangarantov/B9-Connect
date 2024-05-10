@@ -4,15 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.java.Log;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Data
 @Builder
@@ -25,12 +24,24 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String description;
+    private String problem;
     private Long service_id;
     private Long owner_id;
-    private Instant created;
-    private Instant modified;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinTable(name = "tickets_users",
+            joinColumns = @JoinColumn(name = "ticket_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
+    @ToString.Exclude
+    private Set<User> ticketUsers = new HashSet<>();
+    @Column(insertable = false, updatable = false)
+    private Instant created;
+    @Column(insertable = false, updatable = false)
+    private Instant modified;
 
     @Override
     public final int hashCode() {
@@ -42,6 +53,7 @@ public class Ticket {
         }
         return Objects.hash(entityClass, getId());
     }
+
 
     @Override
     public final boolean equals(Object obj) {
