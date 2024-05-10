@@ -4,7 +4,12 @@ let app = new Vue({
     data: {
         user:null,
         cookieValue:"",
-        services :[],
+        service:{},
+        faq:[],
+        newTicket :{
+            name:"",
+            description:""
+        }
     },
     methods:{
         getCookie(name) {
@@ -18,31 +23,25 @@ let app = new Vue({
             th.user = user
             user.value =""
         },
-        async splitServicesIntoGroups(services) {
-            const groups = [];
-            for (let i = 0; i < services.length; i += 3) {
-                groups.push(services.slice(i, i + 3));
-            }
-            return groups;
-        },
-        async getServices(){
-            let response = await fetch('/api/v1/services', {
-                method: 'GET',
+        async sendTIcket(e){
+            e.preventDefault()
+            let response = await fetch('/api/v1/services/ticket', {
+                method: 'POST',
                 headers: {
                     'X-XSRF-TOKEN': this.cookieValue
-                }
+                },
+                body:JSON.stringify(this.newTicket)
             })
             if (response.ok) {
-                let data = JSON.parse(await response.text())
-                let separated_services = await this.splitServicesIntoGroups(data)
-                console.log(separated_services)
-                this.services = separated_services
+
+                await location.reload()
             }
         },
         async logout() {
             let response = await fetch('/logout', {
                 method: 'POST',
                 headers: {
+                    'Content-type':"application/json",
                     'X-XSRF-TOKEN': this.cookieValue
                 }
             })
@@ -54,6 +53,5 @@ let app = new Vue({
     async created(){
         this.cookieValue = this.getCookie('XSRF-TOKEN')
         this.getUser()
-        await this.getServices()
     }
 })

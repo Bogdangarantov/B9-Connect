@@ -4,7 +4,7 @@ let app = new Vue({
     data: {
         user:null,
         cookieValue:"",
-        services :[],
+        service : {}
     },
     methods:{
         getCookie(name) {
@@ -18,25 +18,19 @@ let app = new Vue({
             th.user = user
             user.value =""
         },
-        async splitServicesIntoGroups(services) {
-            const groups = [];
-            for (let i = 0; i < services.length; i += 3) {
-                groups.push(services.slice(i, i + 3));
-            }
-            return groups;
-        },
-        async getServices(){
-            let response = await fetch('/api/v1/services', {
-                method: 'GET',
+        async getService(){
+            let link = new URLSearchParams(window.location.search)
+            let response = await fetch('/api/v1/services/'+link.get("service_id"), {
+                method: 'GET' +
+                    '',
                 headers: {
                     'X-XSRF-TOKEN': this.cookieValue
                 }
             })
             if (response.ok) {
-                let data = JSON.parse(await response.text())
-                let separated_services = await this.splitServicesIntoGroups(data)
-                console.log(separated_services)
-                this.services = separated_services
+                this.service = JSON.parse(await response.text())
+                console.log(this.service)
+
             }
         },
         async logout() {
@@ -54,6 +48,6 @@ let app = new Vue({
     async created(){
         this.cookieValue = this.getCookie('XSRF-TOKEN')
         this.getUser()
-        await this.getServices()
+        await this.getService()
     }
 })

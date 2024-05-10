@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #000000, #c89116);
+
+}
+*{
+    font-family: 'K2D', sans-serif;
+    transition: 1s ease;
+}
+.logo{
+    width: 14rem;
+}
+
+.nav-item-custom{
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: rgba(0, 0, 0, 0.48);
+    border-radius: 50px;
+    margin: 0.3rem;
+
+}
+.nav-item-custom a{
+    color: white;
+    font-family: "K2D",sans-serif;
+
+}
+.nav-item-custom:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.my-cab{
+    font-size: 40px;
+    color:rgba(0, 0, 0, 0.48) ;
+}
+.dropdown-menu[data-bs-popper]{
+    left: -8rem!important;
+}
+.dropdown-menu{
+    position: absolute!important;
+}
+.nav-container{
+    justify-content: center;
+    display: flex;
+}
+.service-name{
+    color: white;
+}
+.main-container{
+    margin-top: 7rem;
+}
+.head-title{
+    text-align: center;
+}
+.head-title h1{
+    font-weight: 400;
+    font-size: 6vw;
+    background-color: #EDBB0B;
+    /*background-color: #565656;*/
+    color: transparent;
+    text-shadow: 5px 0px 15px rgba(0, 0, 0, 0.5);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.accordion-container{
+    padding-left: 7rem;
+    padding-right: 7rem;
+    padding-top: 2rem;
+}
+
+.accordion-item{
+    margin-top: 1rem;
+    box-shadow: 5px 11px 5px #0000008a;
+}
+.accordion-button{
+    color: #EDBB0B!important;
+}
+.accordion-body{
+    color: #EDBB0B!important;
+}
+.accordion-button,.accordion-item,.accordion-header,.accordion-body{
+    background-color: rgba(175, 139, 10)!important;
+    border: 0px transparent!important;
+}
+.accordion-button:not(.collapsed){
+    box-shadow: none!important;
+}

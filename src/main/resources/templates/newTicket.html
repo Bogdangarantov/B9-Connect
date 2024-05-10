@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="_csrf" content="${_csrf.token}"/>
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
-    <link rel="stylesheet" href="/css/services.css">
+    <link rel="stylesheet" href="/css/newTicket.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' rel='stylesheet'>
@@ -28,7 +28,9 @@
                     aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon text-primary"></span>
             </button>
+            <div class="service-name">{{service.name}}</div>
             <div class="collapse navbar-collapse" id="navbarArea">
+                <ul></ul>
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item nav-item-custom" v-if="user.roles.includes('MANAGER')">
                         <a class="nav-link link-hover" href="/management">Management</a>
@@ -54,21 +56,30 @@
         </div>
     </header>
 
-    <div class="container-fluid">
-        <div class="services-title row">
-            <h1 class="col">Services</h1>
+    <div class="container-fluid main-container">
+        <div class="head-title">
+            <h1>Support Ticket</h1>
         </div>
-        <div class="row services-container" v-for="(servRow,rowIndex) in services">
-            <div class= "service card col" v-for="(service,index) in servRow"  style="width: 12rem;">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item service-title">{{service.name}}</li>
-                    <a :href="'/support?service_id='+service.id" class="btn service-btn">Support</a>
-                </ul>
-            </div>
+        <div class="ticket-container container">
+            <form >
+                <div class="form-group">
+                    <label for="problem-name">Problem name</label>
+                    <input type="text" class="form-control problem-name" v-model="newTicket.name" id="problem-name"
+                           placeholder="Enter Problem Name">
+                </div>
+                <div class="form-group">
+                    <label for="problem-description">Problem Description</label>
+                    <textarea class="form-control problem-description" v-model="newTicket.description" id="problem-description"
+                              placeholder="Describe your problem"></textarea>
+                </div>
+                <div class="send-ticket-div">
+                    <button type="submit" v-on:click="sendTIcket" class="btn send-ticket-btn">Send Ticket</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-<script src="/js/services.js" type="module"></script>
+<script src="/js/newTicket.js" type="module"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
         integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>

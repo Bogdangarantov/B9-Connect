@@ -1,5 +1,6 @@
 package com.example.b9connect.config.security;
 
+import com.example.b9connect.entities.User;
 import com.example.b9connect.entities.UserRole;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -37,7 +38,11 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/css/**", "/js/**", "/img/**")
                         .permitAll()
-                        .requestMatchers(HttpMethod.GET,  "/","/services","/api/v1/services/**","/api/v1/users/**")
+                        .requestMatchers(HttpMethod.GET,  "/","/services","/support","/faq","/newTicket","/api/v1/services/**","/api/v1/users/**")
+                        .authenticated()
+                        .requestMatchers(HttpMethod.POST, "/logout")
+                        .authenticated()
+                        .requestMatchers(HttpMethod.POST,  "/api/v1/services/**","/api/v1/users/**","/api/v1/users/**")
                         .authenticated()
                         .requestMatchers(HttpMethod.GET,"/management")
                         .hasAnyAuthority(UserRole.MANAGER.name())

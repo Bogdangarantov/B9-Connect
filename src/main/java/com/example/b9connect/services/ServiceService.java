@@ -16,4 +16,9 @@ public class ServiceService {
     public Set<com.example.b9connect.entities.Service> getServices(){
         return servicesRepository.findAllServices();
     }
+
+    public com.example.b9connect.entities.Service getServiceById(Integer id){
+        return servicesRepository.findServiceById(id);
+    }
+
 }

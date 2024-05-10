@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS public.users
     password character varying NOT NULL,
     name character varying NOT NULL,
     email character varying NOT NULL,
+    enabled boolean NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT user_login_constraint UNIQUE (login)
 );
@@ -68,6 +69,13 @@ CREATE TABLE IF NOT EXISTS public.tickets_users
 (
     user_id bigint NOT NULL,
     ticket_id bigint NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS public.services_users
+(
+    user_id bigint NOT NULL,
+    service_id bigint NOT NULL,
+    CONSTRAINT user_id_service_id_unique_constraint UNIQUE (user_id, service_id)
 );
 
 ALTER TABLE IF EXISTS public.users_roles
@@ -129,6 +137,22 @@ ALTER TABLE IF EXISTS public.tickets_users
 ALTER TABLE IF EXISTS public.tickets_users
     ADD CONSTRAINT ticket_id_foreign_key_constraint FOREIGN KEY (ticket_id)
         REFERENCES public.tickets (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.services_users
+    ADD CONSTRAINT user_id_foreign_key_constraint FOREIGN KEY (user_id)
+        REFERENCES public.users (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.services_users
+    ADD CONSTRAINT service_id_foreign_key_constraint FOREIGN KEY (service_id)
+        REFERENCES public.services (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID;

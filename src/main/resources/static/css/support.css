@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #000000, #c89116);
+
+}
+*{
+    font-family: 'K2D', sans-serif;
+    transition: 1s ease;
+}
+.logo{
+    width: 14rem;
+}
+
+.nav-item-custom{
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: rgba(0, 0, 0, 0.48);
+    border-radius: 50px;
+    margin: 0.3rem;
+
+}
+.nav-item-custom a{
+    color: white;
+    font-family: "K2D",sans-serif;
+
+}
+.nav-item-custom:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.my-cab{
+    font-size: 40px;
+    color:rgba(0, 0, 0, 0.48) ;
+}
+.dropdown-menu[data-bs-popper]{
+    left: -8rem!important;
+}
+.dropdown-menu{
+    position: absolute!important;
+}
+.nav-container{
+    justify-content: center;
+    display: flex;
+}
+.service-name{
+    color: white;
+}
+.navigation{
+    margin-top: 3rem;
+    text-align: center;
+    width: 23rem;
+    padding: 1rem 0 1rem 0;
+    border-radius: 49px;
+    border: 1px solid transparent;
+    color: #CB9316;
+    outline: none;
+    font-size: 50px;
+    font-family: K2D, sans-serif;
+    text-decoration: none;
+    background-color: rgb(252 181 0 / 41%);
+}
+.main-container{
+    margin-top: 7rem;
+}
+.description-container{
+    text-align: center;
+    border: 1px solid transparent;
+    background-color: rgb(175 139 10 / 52%);
+    width: 90%;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgb(0 0 0 / 46%);
+    margin-top: 3rem;
+}
+.description-title{
+    color: #EDBB0B;
+    font-size: 55px;
+}
+.description-body{
+    font-size: 30px;
+    text-align: left;
+    padding: 1rem;
+    color: #EDBB0B;
+}

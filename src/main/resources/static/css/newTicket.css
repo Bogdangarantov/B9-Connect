@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #000000, #c89116);
+
+}
+*{
+    font-family: 'K2D', sans-serif;
+    transition: 1s ease;
+}
+.logo{
+    width: 14rem;
+}
+
+.nav-item-custom{
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: rgba(0, 0, 0, 0.48);
+    border-radius: 50px;
+    margin: 0.3rem;
+
+}
+.nav-item-custom a{
+    color: white;
+    font-family: "K2D",sans-serif;
+
+}
+.nav-item-custom:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.my-cab{
+    font-size: 40px;
+    color:rgba(0, 0, 0, 0.48) ;
+}
+.dropdown-menu[data-bs-popper]{
+    left: -8rem!important;
+}
+.dropdown-menu{
+    position: absolute!important;
+}
+.nav-container{
+    justify-content: center;
+    display: flex;
+}
+.service-name{
+    color: white;
+}
+.main-container{
+    margin-top: 2rem;
+}
+.head-title{
+    text-align: center;
+}
+.head-title h1{
+    font-weight: 400;
+    font-size: 4vw;
+    background-color: #EDBB0B;
+    /*background-color: #565656;*/
+    color: transparent;
+    text-shadow: 5px 0px 15px rgba(0, 0, 0, 0.5);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+.form-group label{
+    color: #EDBB0B;
+}
+.problem-name{
+    box-shadow: 5px 5px 5px rgb(0 0 0 / 59%);
+    border: 0 transparent!important;
+    background-color: #a6821f!important;
+}
+.problem-description{
+    box-shadow: 5px 5px 5px rgb(0 0 0 / 59%);
+    height: 25rem;
+    min-height: 25rem;
+    max-height: 25rem;
+    line-height:10px;
+    border: 0 transparent!important;
+    background-color: #a6821f !important;
+}
+.problem-description::placeholder, .problem-name::placeholder {
+    color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.send-ticket-div{
+    justify-content: center;
+    display: flex;
+}
+.send-ticket-div{
+    padding-top: 2rem;
+}
+.send-ticket-btn{
+    color: rgba(255, 255, 255, 0.65)!important;
+    background-color: #CB9316!important;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.66);
+}
+.send-ticket-btn:active{
+    transform: translate(0,2px);
+}

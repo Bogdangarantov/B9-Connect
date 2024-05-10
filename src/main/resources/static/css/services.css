@@ -34,6 +34,9 @@ body {
 .dropdown-menu[data-bs-popper]{
     left: -8rem!important;
 }
+.dropdown-menu{
+    position: absolute!important;
+}
 .services-title{
     text-align: center;
 }
@@ -55,7 +58,8 @@ body {
     background-color: transparent!important;
 }
 .service{
-    min-width: 12rem;
+    height: fit-content!important;
+    min-width: 12rem!important;
     margin-left: 6rem!important;
     margin-top: 6rem!important;
     margin-right: 6rem!important;
@@ -65,15 +69,15 @@ body {
 }
 .service-title{
     font-weight: 400;
-    font-size: 3vw;
+    font-size: 35px;
     background-color: #EDBB0B!important;
     color: transparent!important;
-    text-shadow: 5px 0px 15px rgba(0, 0, 0, 0.5)!important;
+    text-shadow: 5px 0 15px rgba(0, 0, 0, 0.5)!important;
     -webkit-background-clip: text!important;
     background-clip: text;
 }
 .service-btn{
-    width: 15rem;
+    width: 80%;
     margin: 3rem auto 1rem;
     border-radius: 15px!important;
     background-color: rgba(255, 184, 0, 0.33)!important;
