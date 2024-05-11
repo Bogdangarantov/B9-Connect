@@ -6,12 +6,19 @@ let app = new Vue({
         cookieValue: "",
         newUser: {
             name: "",
-            username: "",
+            login: "",
             password: "",
-            email: ""
+            email: "",
+            roles: []
+        },
+        newService: {
+            name: "",
+            description: "",
+            faq: [],
+            users: []
         },
         blockUserIndex: 0,
-        allUsers:[]
+        allUsers: []
     },
     methods: {
         async getCookie(name) {
@@ -33,10 +40,21 @@ let app = new Vue({
                     'X-XSRF-TOKEN': this.cookieValue
                 }
             })
-            if(response.ok){
+            if (response.ok) {
                 let data = JSON.parse(await response.text())
                 this.allUsers = data
             }
+        },
+        async addUser() {
+            let th = this
+            let response = await fetch("/api/v1/users", {
+                method: "POST",
+                headers: {
+                    'Content-type': "application/json",
+                    'X-XSRF-TOKEN': this.cookieValue
+                },
+                body: JSON.stringify(th.newUser)
+            })
         },
         async logout() {
             let response = await fetch('/logout', {

@@ -4,5 +4,5 @@ import com.example.b9connect.entities.UserRole;
 
 import java.util.Set;
 
-public record UserTO(String name, Long id, Set<UserRole> roles, String login,String email, String pass) {
+public record UserTO(String name, Long id, Set<UserRole> roles, String login,String email, String password) {
 }

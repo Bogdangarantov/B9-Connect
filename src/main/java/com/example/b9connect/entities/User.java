@@ -44,14 +44,6 @@ public class User implements UserDetails {
     @Column(name = "role")
     @Expose
     private Set<UserRole> roles = new HashSet<>();
-//
-//    @ManyToMany(mappedBy = "projectUsers", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
-//    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Project.class)
-//    @JsonIdentityReference(alwaysAsId = true)
-//    @ToString.Exclude
-//    private Set<Project> projects = new HashSet<>();
-//
-
     @Override
     public final int hashCode() {
         return Objects.hashCode(login);
