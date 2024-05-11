@@ -4,6 +4,8 @@ BEGIN;
 
 CREATE TYPE user_role as ENUM ('MANAGER','USER');
 
+CREATE CAST (varchar AS user_role) WITH INOUT AS IMPLICIT;
+
 
 
 CREATE TABLE IF NOT EXISTS public.users
