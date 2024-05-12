@@ -12,140 +12,184 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=K2D' rel='stylesheet'>
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/loading.css">
 </head>
 <body>
 <input id="user" th:value="${user}" style="display:none">
 <div id="app">
-    <header class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand nav-logo" href="/">
-                <img class="logo" src="/img/logo.png" alt="B9-Connect">
-            </a>
-            <button class="navbar-toggler navbar-light" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarArea"
-                    aria-controls="navbarArea" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon text-primary"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarArea">
-                <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item nav-item-custom" v-if="user.roles.includes('MANAGER')">
-                        <a class="nav-link link-hover" href="/management">Management</a>
-                    </li>
-                    <li class="nav-item nav-item-custom">
-                        <a class="nav-link link-hover" href="/services">Services</a>
-                    </li>
-                    <li class="nav-item nav-item-custom">
-                        <a class="nav-link link-hover" href="/chats">Chats</a>
-                    </li>
-                    <li class="nav-item nav-item-custom">
-                        <a class="nav-link link-hover" href="/reports">Reports</a>
-                    </li>
-                    <li class="nav-item my-cab dropdown">
-                        <a class="nav-link nav-user" data-bs-toggle="dropdown" aria-expanded="false"><i
-                                class="fas fa-solid fa-circle-user "></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" v-on:click="logout">Log Out</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+    <div class="loading" id="loading" v-if="loading===true">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-    </header>
+    </div>
+    <div class="body" v-if="loading===false">
+        <header class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand nav-logo" href="/">
+                    <img class="logo" src="/img/logo.png" alt="B9-Connect">
+                </a>
+                <button class="navbar-toggler navbar-light" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarArea"
+                        aria-controls="navbarArea" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon text-primary"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarArea">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item nav-item-custom" v-if="user.roles.includes('MANAGER')">
+                            <a class="nav-link link-hover" href="/management">Management</a>
+                        </li>
+                        <li class="nav-item nav-item-custom">
+                            <a class="nav-link link-hover" href="/services">Services</a>
+                        </li>
+                        <li class="nav-item nav-item-custom">
+                            <a class="nav-link link-hover" href="/chats">Chats</a>
+                        </li>
+                        <li class="nav-item nav-item-custom">
+                            <a class="nav-link link-hover" href="/reports">Reports</a>
+                        </li>
+                        <li class="nav-item my-cab dropdown">
+                            <a class="nav-link nav-user" data-bs-toggle="dropdown" aria-expanded="false"><i
+                                    class="fas fa-solid fa-circle-user "></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" v-on:click="logout">Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col create-user-container">
-                <div class="create-user-content">
-                    <div class="create-user-title">
-                        <h1>Create User</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col create-user-container">
+                    <div class="create-user-content">
+                        <div class="create-user-title">
+                            <h1>Create User</h1>
+                        </div>
+                        <div class="create-user-body">
+                            <form>
+                                <div class="mb-3">
+                                    <input class="new-user-input" placeholder="Name" v-model="newUser.name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="new-user-input" placeholder="Login" v-model="newUser.login" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="new-user-input" placeholder="Password" v-model="newUser.password"
+                                           required>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="new-user-input" placeholder="Email" v-model="newUser.email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <select name="roles-select" class="roles-select" id="roles-select"
+                                            v-model="newUser.roles" multiple required>
+                                        <option value="USER">USER</option>
+                                        <option value="MANAGER">MANAGER</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <button class="create-user-button" v-on:click="addUser" type="submit">Create
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="create-user-body">
-                        <form>
-                            <div class="mb-3">
-                                <input class="new-user-input" placeholder="Name" v-model="newUser.name" required>
+                </div>
+                <div class="col block-user-container">
+                    <div>
+                        <div class="block-user-content row">
+                            <div class="block-user-title">
+                                <h1>Block User</h1>
                             </div>
-                            <div class="mb-3">
-                                <input class="new-user-input" placeholder="Login" v-model="newUser.login" required>
+                            <div class="block-user-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <select class="block-select" v-model="newUser.name">
+                                            <option v-for="(us,index) in allUsers" :value="us.id">{{us.name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <button class="block-user-button" type="submit">Create</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="mb-3">
-                                <input class="new-user-input" placeholder="Password" v-model="newUser.password" required>
+                        </div>
+                        <div class="unblock-user-content row">
+                            <div class="unblock-user-title">
+                                <h1>UnBlock User</h1>
                             </div>
-                            <div class="mb-3">
-                                <input class="new-user-input" placeholder="Email" v-model="newUser.email" required>
+                            <div class="unblock-user-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <select class="unblock-select" v-model="newUser.name">
+                                            <option v-for="(us,index) in allUsers" :value="us.id">{{us.name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <button class="unblock-user-button" type="submit">Create</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="mb-3">
-                                <select name="roles-select" class="roles-select" id="roles-select"
-                                        v-model="newUser.roles" multiple required>
-                                    <option value="USER">USER</option>
-                                    <option value="MANAGER">MANAGER</option>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col create-service-form-div">
+                    <form class="create-service-form">
+                        <div class="create-service-title">
+                            <h1>Create Service</h1>
+                        </div>
+                        <div class="service-info">
+                            <div class="new-service-input-div">
+                                <input class="new-service-input" placeholder="Enter service name..."
+                                       v-model="newService.name" required>
+                            </div>
+                            <div class="new-service-input-div">
+                            <textarea class="new-service-input" placeholder="Enter service description..."
+                                      v-model="newService.description" required></textarea>
+                            </div>
+                        </div>
+                        <div class="service-faq">
+                            <div class="faq-title">
+                                <h1>FAQ</h1>
+                            </div>
+                            <div class="faq-element" v-for="(faq,index) in newService.faq">
+                                <div class="new-service-faq-input-div">
+                                    <input class="new-service-faq-input" placeholder="Enter question..."
+                                           v-model="faq.question" required>
+                                </div>
+                                <div class="new-service-faq-input-div">
+                                <textarea class="new-service-faq-input" placeholder="Enter answer..."
+                                          v-model="faq.answer" required></textarea>
+                                </div>
+                                <div class="remove" v-if="index!==0">
+                                    <i class="fas fa-solid fa-trash" v-on:click="removeQuestion(faq)"></i>
+                                </div>
+                            </div>
+                            <div class="add-faq-elem">
+                                <i class="fas fa-solid fa-plus" v-on:click="addQuestion()"></i>
+                            </div>
+                        </div>
+                        <div class="service-users">
+                            <div class="service-users-title">
+                                <h1>Users</h1>
+                            </div>
+                            <div class="selector">
+                                <select multiple id="multiple" multiselect-search="true" v-model="newService.users">
+                                    <option v-for="(user,index) in allUsers" :value="user.id">{{user.name}}</option>
                                 </select>
                             </div>
-                            <div class="mb-3">
-                                <button class="create-user-button" v-on:click="addUser" type="submit">Create</button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="create-service-button-div">
+                            <button class="create-service-button" v-on:click="createService">Create Service</button>
+                        </div>
+                    </form>
                 </div>
-            </div>
-            <div class="col block-user-container">
-                <div>
-                    <div class="block-user-content row">
-                        <div class="block-user-title">
-                            <h1>Block User</h1>
-                        </div>
-                        <div class="block-user-body">
-                            <form>
-                                <div class="mb-3">
-                                    <select class="block-select" v-model="newUser.name">
-                                        <option v-for="(us,index) in allUsers" :value="us.id">{{us.name}}</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <button class="block-user-button" type="submit">Create</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="unblock-user-content row">
-                        <div class="unblock-user-title">
-                            <h1>UnBlock User</h1>
-                        </div>
-                        <div class="unblock-user-body">
-                            <form>
-                                <div class="mb-3">
-                                    <select class="unblock-select" v-model="newUser.name">
-                                        <option v-for="(us,index) in allUsers" :value="us.id">{{us.name}}</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <button class="unblock-user-button" type="submit">Create</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col create-service-form-div">
-                <form class="create-service-form">
-                    <div class="mb-3">
-                        <input class="new-user-input" placeholder="Service Name" v-model="newService.name">
-                    </div>
-                    <div class="mb-3">
-                        <textarea class="new-user-input" placeholder="Enter Service Description" v-model="newService.description"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <input class="new-user-input" placeholder="Password" v-model="newUser.password">
-                    </div>
-                    <div class="mb-3">
-                        <input class="new-user-input" placeholder="Email" v-model="newUser.email">
-                    </div>
-
-                    <div class="mb-3">
-                        <button class="create-user-button" type="submit">Create</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -158,7 +202,6 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-<!--<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>-->
 
 </body>
 </html>

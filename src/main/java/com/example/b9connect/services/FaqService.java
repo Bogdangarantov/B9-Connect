@@ -1,4 +1,4 @@
-package com.example.b9connect.controllers;
+package com.example.b9connect.services;
 
 import com.example.b9connect.entities.Faqs;
 import com.example.b9connect.repos.FaqsRepository;

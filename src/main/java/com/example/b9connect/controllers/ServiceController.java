@@ -1,10 +1,10 @@
 package com.example.b9connect.controllers;
 
+import com.example.b9connect.dto.ServiceTO;
 import com.example.b9connect.dto.TicketTO;
 import com.example.b9connect.entities.Service;
-import com.example.b9connect.entities.Ticket;
 import com.example.b9connect.entities.User;
-import com.example.b9connect.repos.FaqsRepository;
+import com.example.b9connect.services.FaqService;
 import com.example.b9connect.services.ServiceService;
 import com.example.b9connect.services.TicketService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -42,4 +41,12 @@ public class ServiceController {
         User user = (User) authentication.getPrincipal();
         return ticketService.addTicket(ticketTO,user);
     }
+
+//    @PostMapping("/api/v1/services/")
+//    @ResponseStatus(HttpStatus.OK)
+//    public Service addService(@RequestBody ServiceTO serviceTO, Authentication authentication) {
+//        User user = (User) authentication.getPrincipal();
+//        return serviceService.addService(user,serviceTO);
+//    }
+
 }

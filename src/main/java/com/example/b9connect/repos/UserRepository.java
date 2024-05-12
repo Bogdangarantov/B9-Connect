@@ -13,7 +13,8 @@ import java.util.Set;
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query("Select u FROM User u join fetch u.roles where u.login = :login")
     Optional<User> findUserByLogin(String login);
-
+    @Query("Select u FROM User u join fetch u.roles where u.id = :id")
+    User findUserById(Long id);
     @Query("SELECT u FROM User u where u.enabled = true")
     Set<User> getAll();
 

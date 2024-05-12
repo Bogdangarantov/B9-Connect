@@ -34,7 +34,15 @@ public class Service {
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private Set<User> servicesUsers = new HashSet<>();
-
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+//    @JoinTable(name = "faqs",
+//            joinColumns = @JoinColumn(name = "service_id"))
+//    @JsonIdentityInfo(
+//            generator = ObjectIdGenerators.PropertyGenerator.class,
+//            property = "id")
+//    @JsonIdentityReference(alwaysAsId = true)
+//    @ToString.Exclude
+//    private Set<Faqs> servicesFaqs = new HashSet<>();
     @Override
     public final int hashCode() {
         Class<?> entityClass;
