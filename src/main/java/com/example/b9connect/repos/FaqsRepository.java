@@ -10,6 +10,6 @@ import java.util.Set;
 
 @Repository
 public interface FaqsRepository extends JpaRepository<Faqs, Long> {
-    @Query("SELECT f from Faqs f where f.service_id = :id")
+    @Query("SELECT f from Faqs f where f.service.id = :id")
     Set<Faqs> findAllByServiceId(Integer id);
 }

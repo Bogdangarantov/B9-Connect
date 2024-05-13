@@ -12,6 +12,12 @@ let app = new Vue({
             email: "",
             roles: []
         },
+        blockUser:{
+            id:""
+        },
+        unBlockUser:{
+            id:""
+        },
         newService: {
             name: "",
             description: "",
@@ -21,7 +27,8 @@ let app = new Vue({
                     answer: ""
                 }
             ],
-            users: []
+            users: [],
+            contactEmail:""
         },
         blockUserIndex: 0,
         allUsers: []
@@ -108,6 +115,7 @@ let app = new Vue({
             let response = await fetch('/api/v1/services/', {
                 method: 'POST',
                 headers: {
+                    "Content-Type":"application/json",
                     'X-XSRF-TOKEN': this.cookieValue
                 },
                 body:JSON.stringify(this.newService)

@@ -34,15 +34,18 @@ public class Service {
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private Set<User> servicesUsers = new HashSet<>();
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-//    @JoinTable(name = "faqs",
-//            joinColumns = @JoinColumn(name = "service_id"))
-//    @JsonIdentityInfo(
-//            generator = ObjectIdGenerators.PropertyGenerator.class,
-//            property = "id")
-//    @JsonIdentityReference(alwaysAsId = true)
-//    @ToString.Exclude
-//    private Set<Faqs> servicesFaqs = new HashSet<>();
+    @OneToMany(mappedBy = "service",fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
+    @ToString.Exclude
+    private Set<Faqs> servicesFaqs = new HashSet<>();
+
+    public void addFaq(Faqs faqs){
+        servicesFaqs.add(faqs);
+        faqs.setService(this);
+    }
     @Override
     public final int hashCode() {
         Class<?> entityClass;

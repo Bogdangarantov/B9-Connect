@@ -108,7 +108,7 @@
                             <div class="block-user-body">
                                 <form>
                                     <div class="mb-3">
-                                        <select class="block-select" v-model="newUser.name">
+                                        <select class="block-select" v-model="blockUser.id">
                                             <option v-for="(us,index) in allUsers" :value="us.id">{{us.name}}</option>
                                         </select>
                                     </div>
@@ -125,7 +125,7 @@
                             <div class="unblock-user-body">
                                 <form>
                                     <div class="mb-3">
-                                        <select class="unblock-select" v-model="newUser.name">
+                                        <select class="unblock-select" v-model="unBlockUser.id">
                                             <option v-for="(us,index) in allUsers" :value="us.id">{{us.name}}</option>
                                         </select>
                                     </div>
@@ -152,6 +152,10 @@
                             <div class="new-service-input-div">
                             <textarea class="new-service-input" placeholder="Enter service description..."
                                       v-model="newService.description" required></textarea>
+                            </div>
+                            <div class="new-service-input-div">
+                            <input class="new-service-input" placeholder="Enter service contact email"
+                                      v-model="newService.contactEmail" required>
                             </div>
                         </div>
                         <div class="service-faq">

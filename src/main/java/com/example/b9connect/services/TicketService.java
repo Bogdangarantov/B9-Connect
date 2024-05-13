@@ -16,10 +16,13 @@ import java.util.HashSet;
 public class TicketService {
     private final TicketsRepository ticketsRepository;
     private final UserRepository userRepository;
+    private final ServicesRepository servicesRepository;
 
     public TicketTO addTicket(TicketTO ticketTO, User user){
         Ticket ticket = mapToTicket(user.getId(),ticketTO);
         ticket.getTicketUsers().add(user);
+        com.example.b9connect.entities.Service service = servicesRepository.findServiceById(ticketTO.serviceId());
+        service.getServicesUsers().stream().forEach(sUser->ticket.getTicketUsers().add(sUser));
         System.out.println(ticket);
         ticketsRepository.saveAndFlush(ticket);
         return new TicketTO(ticket.getId(), ticket.getName(), ticket.getProblem(),ticket.getService_id());
@@ -29,6 +32,7 @@ public class TicketService {
                 .owner_id(userRepository.getReferenceById(ownerId).getId())
                 .name(ticketTO.name()).problem(ticketTO.problem())
                 .service_id(ticketTO.serviceId())
-                .ticketUsers(new HashSet<>()).build();
+                .ticketUsers(new HashSet<>())
+                .build();
     }
 }

@@ -13,5 +13,5 @@ public interface ServicesRepository extends JpaRepository<Service, Long> {
     @Query("SELECT p from Service p")
     Set<Service> findAllServices();
     @Query("SELECT p from Service p where p.id = :id")
-    Service findServiceById(Integer id);
+    Service findServiceById(Long id);
 }
