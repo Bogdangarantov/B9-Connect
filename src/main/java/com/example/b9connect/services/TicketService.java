@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -34,5 +35,9 @@ public class TicketService {
                 .service_id(ticketTO.serviceId())
                 .ticketUsers(new HashSet<>())
                 .build();
+    }
+
+    public Set<Ticket> getAllTickets(User user){
+     return ticketsRepository.findTicketsByUser(user.getId());
     }
 }

@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #000000, #c89116);
+
+}
+*{
+    font-family: 'K2D', sans-serif;
+    transition: 1s ease;
+}
+.logo{
+    width: 14rem;
+}
+
+.nav-item-custom{
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: rgba(0, 0, 0, 0.48);
+    border-radius: 50px;
+    margin: 0.3rem;
+
+}
+.nav-item-custom a{
+    color: white;
+    font-family: "K2D",sans-serif;
+
+}
+.nav-item-custom:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.my-cab{
+    font-size: 40px;
+    color:rgba(0, 0, 0, 0.48) ;
+}
+.dropdown-menu[data-bs-popper]{
+    left: -8rem!important;
+}
+.dropdown-menu{
+    position: absolute!important;
+}
+.nav-container{
+    justify-content: center;
+    display: flex;
+}
+.service-name{
+    color: white;
+}
+.main-container{
+    margin-top: 7rem;
+}
+
