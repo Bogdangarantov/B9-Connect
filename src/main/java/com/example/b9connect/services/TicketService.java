@@ -20,7 +20,7 @@ public class TicketService {
 
     public TicketTO addTicket(TicketTO ticketTO, User user){
         Ticket ticket = mapToTicket(user.getId(),ticketTO);
-        ticket.getTicketUsers().add(user);
+//        ticket.getTicketUsers().add(user);
         com.example.b9connect.entities.Service service = servicesRepository.findServiceById(ticketTO.serviceId());
         service.getServicesUsers().stream().forEach(sUser->ticket.getTicketUsers().add(sUser));
         System.out.println(ticket);
