@@ -3,7 +3,10 @@ let app = new Vue({
     el: '#app',
     data: {
         user:null,
-        cookieValue:""
+        cookieValue:"",
+        websocket:{},
+        chats:[],
+        currentChat:{}
     },
     methods:{
         getCookie(name) {
@@ -25,7 +28,34 @@ let app = new Vue({
                 }
             })
             if (response.ok){
+                let data = JSON.parse(await response.text())
+                this.chats = data
+                this.chats.forEach(chat=> chat.active = false)
+                console.log(this.chats)
             }
+        },
+        async setCurrentChat(chat,index){
+            console.log("set")
+            this.currentChat = chat
+            this.chats.forEach(chat=> chat.active=false)
+            this.chats[index].active = true
+            await this.sleep(100)
+            this.scrollDown()
+
+        },
+        async sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        },
+        getActive(index){
+            if (this.chats[index].active){
+                return "active"
+            }else{
+                return ""
+            }
+        },
+        scrollDown(){
+            let chatHistory = document.getElementById("chat-history")
+            chatHistory.scrollTo(0,document.body.scrollHeight)
         },
         async socket(){
             var socket = new SockJS('/chat');
@@ -61,5 +91,9 @@ let app = new Vue({
     async created(){
         this.cookieValue = this.getCookie('XSRF-TOKEN')
         this.getUser()
+        // await this.socket()
+        await this.getChats()
+
+
     }
 })

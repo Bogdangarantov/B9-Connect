@@ -13,7 +13,7 @@ import java.util.Set;
 public class FaqService {
     private final FaqsRepository faqsRepository;
 
-    public Set<Faqs> getFaqByServiceId(Integer id) {
+    public Set<Faqs> getFaqByServiceId(Long id) {
         return faqsRepository.findAllByServiceId(id);
     }
 
