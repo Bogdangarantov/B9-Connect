@@ -1,3 +1,4 @@
+
 let app = new Vue({
     mode: 'production',
     el: '#app',
@@ -6,7 +7,8 @@ let app = new Vue({
         cookieValue:"",
         websocket:{},
         chats:[],
-        currentChat:{}
+        currentChat:{},
+        stompClient :null
     },
     methods:{
         getCookie(name) {
@@ -57,6 +59,9 @@ let app = new Vue({
             let chatHistory = document.getElementById("chat-history")
             chatHistory.scrollTo(0,document.body.scrollHeight)
         },
+        async getChatHistory(){
+
+        },
         async socket(){
             var socket = new SockJS('/chat');
             var stompClient = Stomp.over(socket);
@@ -87,12 +92,54 @@ let app = new Vue({
                 await location.reload()
             }
         },
-    },
+        async sock(){
+            this.stompClient = new StompJs.Client({
+                brokerURL: 'ws://localhost:8082/chat'
+            });
+
+            this.stompClient.onConnect = (frame) => {
+                this.setConnected(true);
+                console.log('Connected: ' + frame);
+                this.stompClient.subscribe('/topic/public', (greeting) => {
+                    console.log(JSON.parse(greeting.body).content);
+                });
+            };
+
+            this.stompClient.onWebSocketError = (error) => {
+                console.error('Error with websocket', error);
+            };
+
+            this.stompClient.onStompError = (frame) => {
+                console.error('Broker reported error: ' + frame.headers['message']);
+                console.error('Additional details: ' + frame.body);
+            };
+        },
+        connect() {
+            this.stompClient.activate();
+        },
+        disconnect() {
+            this.stompClient.deactivate();
+            this.setConnected(false);
+            console.log("Disconnected");
+        },
+        sendMessage(message) {
+            this.stompClient.publish({
+                destination: "/chat",
+                body: JSON.stringify(message)
+            });
+        }    },
     async created(){
         this.cookieValue = this.getCookie('XSRF-TOKEN')
         this.getUser()
         // await this.socket()
         await this.getChats()
+        await this.sock()
+        this.connect()
+        this.sendMessage({
+            ticket_id:6,
+            message:"huj vam v ruki",
+
+        })
 
 
     }

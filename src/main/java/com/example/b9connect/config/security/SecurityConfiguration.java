@@ -38,11 +38,11 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/css/**", "/js/**", "/img/**")
                         .permitAll()
-                        .requestMatchers(HttpMethod.GET,  "/","/services","/support","/faq","/newTicket","/chats","/api/v1/services/**","/api/v1/users/**")
+                        .requestMatchers(HttpMethod.GET,  "/chat","/ws/**","/ws","/","/services","/support","/faq","/newTicket","/chats","/user","/api/v1/services/**","/api/v1/users/**")
                         .authenticated()
                         .requestMatchers(HttpMethod.POST, "/logout")
                         .authenticated()
-                        .requestMatchers(HttpMethod.POST,  "/api/v1/services/**","/api/v1/users/**","/api/v1/users/**")
+                        .requestMatchers(HttpMethod.POST,  "/chat","/api/v1/services/**","/api/v1/users/**","/api/v1/users/**")
                         .authenticated()
                         .requestMatchers(HttpMethod.GET,"/management")
                         .hasAnyAuthority(UserRole.MANAGER.name())
