@@ -34,6 +34,7 @@ public class Service {
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private Set<User> servicesUsers = new HashSet<>();
+
     @OneToMany(mappedBy = "service",fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIdentityInfo(

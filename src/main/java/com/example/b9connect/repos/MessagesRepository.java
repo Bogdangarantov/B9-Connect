@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Repository
 public interface MessagesRepository extends JpaRepository<Message, Long> {
-    @Query("SELECT m from Message m where m.ticket_id = :ticketId")
+    @Query("SELECT m from Message m where m.ticket.id = :ticketId")
     Set<Message> findAllMessagesByTicket(Long ticketId);
 
 }

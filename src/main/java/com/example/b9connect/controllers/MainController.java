@@ -54,6 +54,7 @@ public class MainController {
     @GetMapping("/chats")
     public String chats(Authentication authentication, Model model) {
         model.addAttribute("user", gson.toJson(authentication.getPrincipal()));
-        return "test";
+        return "chats";
     }
+
 }

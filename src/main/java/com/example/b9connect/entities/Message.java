@@ -1,10 +1,8 @@
 package com.example.b9connect.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.time.Instant;
@@ -20,9 +18,13 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long ticket_id;
     private Long user_id ;
     private String message;
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "ticket_id")
+    @JsonIdentityReference(alwaysAsId = true)
+    @ToString.Exclude
+    private Ticket ticket;
     private Instant created;
 
     @Override

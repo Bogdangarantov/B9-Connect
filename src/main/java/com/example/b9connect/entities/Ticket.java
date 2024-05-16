@@ -38,6 +38,20 @@ public class Ticket {
     @JsonIdentityReference(alwaysAsId = true)
     @ToString.Exclude
     private Set<User> ticketUsers = new HashSet<>();
+
+
+
+    @OneToMany(mappedBy = "ticket",fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
+    @ToString.Exclude
+    private Set<Message> ticketMessages = new HashSet<>();
+
+
+
+
     @Column(insertable = false, updatable = false)
     private Instant created;
     @Column(insertable = false, updatable = false)

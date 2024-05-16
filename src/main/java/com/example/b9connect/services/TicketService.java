@@ -1,6 +1,7 @@
 package com.example.b9connect.services;
 
 import com.example.b9connect.dto.TicketTO;
+import com.example.b9connect.entities.Message;
 import com.example.b9connect.entities.Ticket;
 import com.example.b9connect.entities.User;
 import com.example.b9connect.repos.ServicesRepository;
@@ -36,7 +37,15 @@ public class TicketService {
                 .ticketUsers(new HashSet<>())
                 .build();
     }
-
+    public Message addMessageToTicket(Long ticketId, Message message){
+        Ticket ticket = ticketsRepository.findTicketById(ticketId);
+        ticket.getTicketMessages().add(message);
+        ticketsRepository.saveAndFlush(ticket);
+        return message;
+    }
+    public Ticket getTicketById(Long ticket_id){
+        return ticketsRepository.findTicketById(ticket_id);
+    }
     public Set<Ticket> getAllTickets(User user){
      return ticketsRepository.findTicketsByUser(user.getId());
     }
