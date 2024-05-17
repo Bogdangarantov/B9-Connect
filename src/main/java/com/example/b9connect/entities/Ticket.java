@@ -42,14 +42,12 @@ public class Ticket {
 
 
     @OneToMany(mappedBy = "ticket",fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JsonIdentityReference(alwaysAsId = true)
-    @JsonIdentityInfo(
-            generator = ObjectIdGenerators.PropertyGenerator.class,
-            property = "id")
-    @ToString.Exclude
     private Set<Message> ticketMessages = new HashSet<>();
 
-
+    public void addMessage(Message message){
+        ticketMessages.add(message);
+        message.setTicket(this);
+    }
 
 
     @Column(insertable = false, updatable = false)

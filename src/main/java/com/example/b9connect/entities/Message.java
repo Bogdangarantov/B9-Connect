@@ -1,6 +1,8 @@
 package com.example.b9connect.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
@@ -18,14 +20,30 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long user_id ;
     private String message;
+
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "ticket_id")
     @JsonIdentityReference(alwaysAsId = true)
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     @ToString.Exclude
     private Ticket ticket;
+
+    @Column(insertable = false, updatable = false)
+    @org.hibernate.annotations.Generated()
     private Instant created;
+
+
+
+
+
+
+    @ManyToOne(fetch = FetchType.EAGER ,cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "user_id",nullable = false)
+    @ToString.Exclude
+    private User user;
 
     @Override
     public final int hashCode() {

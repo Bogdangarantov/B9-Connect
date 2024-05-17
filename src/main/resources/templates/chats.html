@@ -75,7 +75,7 @@
                                     v-on:click="setCurrentChat(chat,index)">
                                     <i class="fas fa-solid fa-circle-exclamation"></i>
                                     <div class="about">
-                                        <div class="name">{{chat.name}}</div>
+                                        <div class="name">{{ chat.name }}</div>
                                     </div>
                                 </li>
                             </ul>
@@ -83,20 +83,23 @@
                         <div class="chat">
                             <div class="chat-history" id="chat-history" v-if="currentChat.name!==undefined">
                                 <ul class="m-b-0">
-                                    <li class="message" v-for="(index,message) in messages" :key="index">
-                                        <i style="background-color: rgb(255, 152, 0);">a</i>
-                                        <span>alkash</span>
-                                        <p>asdasd</p></li>
+                                    <li class="message" v-for="(message,index) in messages" :key="index">
+                                        <i style="background-color: rgb(255, 152, 0);">{{ user.name[0] }}</i>
+                                        <span>{{ message.user.name }}</span>
+                                        <p>{{ message.message }}</p></li>
                                 </ul>
                             </div>
                             <div class="chat-message clearfix" v-if="currentChat.name!==undefined">
-                                <div class="input-group mb-0">
-                                    <input type="text" v-model="chatMessage" class="form-control" placeholder="Enter text here...">
-                                    <div class="input-group-prepend" v-on:click="sendMessage()">
+                                <form v-on:submit="sendMessage">
+                                    <div class="input-group mb-0">
+                                        <input type="text" v-model="chatMessage" v-on:submit="sendMessage"
+                                               class="form-control" placeholder="Enter text here...">
+                                        <div class="input-group-prepend" v-on:click="sendMessage">
                                         <span class="input-group-text"><i
                                                 class="fas fa-solid fa-paper-plane"></i></span>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>

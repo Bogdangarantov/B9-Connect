@@ -170,6 +170,22 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION add_created()
+    RETURNS TRIGGER AS
+$$
+BEGIN
+    NEW.created = NOW();
+RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE TRIGGER message_triger
+    BEFORE INSERT
+    ON messages
+    FOR EACH ROW
+EXECUTE FUNCTION add_created();
+
 CREATE OR REPLACE TRIGGER before_insert_trigger
     BEFORE INSERT
     ON tickets

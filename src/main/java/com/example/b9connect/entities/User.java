@@ -21,9 +21,6 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @Table(name = "users")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +34,8 @@ public class User implements UserDetails {
     private String name;
     private String email;
     private Boolean enabled = true;
+
+
 
     @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"))

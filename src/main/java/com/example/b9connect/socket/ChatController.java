@@ -2,21 +2,37 @@ package com.example.b9connect.socket;
 
 import com.example.b9connect.dto.ChatUserTO;
 import com.example.b9connect.entities.Message;
+import com.example.b9connect.entities.Ticket;
+import com.example.b9connect.entities.User;
+import com.example.b9connect.repos.UserRepository;
+import com.example.b9connect.services.MessageService;
 import com.example.b9connect.services.TicketService;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 
 import java.util.*;
 
 @Controller
+@RequiredArgsConstructor
 public class ChatController {
     @Autowired
     TicketService ticketService;
+    @Autowired
+    MessageService messageService;
+
+    private final UserRepository userRepository;
+
+
+    private final EntityManager entityManager;
     private Map<Long, List<ChatUserTO>> chatUsersMap = new HashMap<>();
 
     //    @MessageMapping("/chat.sendMessage")
@@ -26,12 +42,14 @@ public class ChatController {
 //    }
     @MessageMapping("/chat/{chatId}/sendMessage")
     @SendTo("/topic/{chatId}")
+    @Transactional
     public Message sendMessage(@Payload Message message,
-                               @DestinationVariable Long chatId,SimpMessageHeaderAccessor headerAccessor) {
+                               @DestinationVariable Long chatId, Authentication authentication) {
         System.out.println(message.toString());
-//        message.setTicket(ticketService.getTicketById(chatId));
-//        ticketService.addMessageToTicket(chatId,message);
-        return message;
+        User user= entityManager.merge((User) authentication.getPrincipal());
+        message.setUser(user);
+        Message msg =messageService.addMessage(chatId,message);
+        return msg;
     }
 
     //    @MessageMapping("/chat/{chatId}/addUser")

@@ -64,12 +64,14 @@ public class ServiceController {
     @ResponseStatus(HttpStatus.OK)
     public Set<Ticket> getAllTickets(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
-        return ticketService.getAllTickets(user);
+        Set<Ticket> tickets = ticketService.getAllTickets(user);
+        System.out.println(tickets);
+        return tickets;
     }
 
     @GetMapping("/api/v1/services/ticket/chat/{ticket_id}")
     @ResponseStatus(HttpStatus.OK)
-    public Set<Message> getAllTickets(@PathVariable(name = "ticket_id", required = true) Long ticket_id, Authentication authentication) {
+    public Set<Message> getMessagesByTicketId(@PathVariable(name = "ticket_id", required = true) Long ticket_id, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         return messageService.getMessages(ticket_id);
     }

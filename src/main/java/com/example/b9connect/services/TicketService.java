@@ -37,10 +37,10 @@ public class TicketService {
                 .ticketUsers(new HashSet<>())
                 .build();
     }
-    public Message addMessageToTicket(Long ticketId, Message message){
+    public Message addMessage(Long ticketId, Message message){
         Ticket ticket = ticketsRepository.findTicketById(ticketId);
-        ticket.getTicketMessages().add(message);
-        ticketsRepository.saveAndFlush(ticket);
+        ticket.addMessage(message);
+        Ticket ret = ticketsRepository.saveAndFlush(ticket);
         return message;
     }
     public Ticket getTicketById(Long ticket_id){

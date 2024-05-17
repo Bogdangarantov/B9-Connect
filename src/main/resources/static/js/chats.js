@@ -33,19 +33,25 @@ let app = new Vue({
                 }
             })
             if (response.ok) {
-                this.chats = JSON.parse(await response.text())
-                this.chats.forEach(chat => chat.active = false)
+                let data = JSON.parse(await response.text())
+                console.log(this.chats)
+                data.forEach(chat => chat.active = false)
+                this.chats = data
                 console.log(this.chats)
             }
         },
         async setCurrentChat(chat, index) {
             console.log("set")
             this.currentChat = chat
+            this.messages = this.currentChat.ticketMessages
+            console.log(this.currentChat)
             this.chats.forEach(chat => chat.active = false)
             this.chats[index].active = true
             if (this.stompClient!==null){
                 await this.stompClient.disconnect()
                 await this.connect(chat.id)
+
+
             }else{
                 await this.connect(chat.id)
             }
@@ -105,6 +111,7 @@ let app = new Vue({
             connectingElement.style.color = 'red';
         },
         async sendMessage(event) {
+            event.preventDefault();
             if (this.chatMessage && this.stompClient) {
                 let chatMessage = {
                     user_id:this.user.id,
@@ -113,7 +120,6 @@ let app = new Vue({
                 this.stompClient.send("/app/chat/"+this.currentChat.id+"/sendMessage", {}, JSON.stringify(chatMessage));
                 this.chatMessage = ""
             }
-            event.preventDefault();
         },
         onMessageReceived(payload) {
             let message = JSON.parse(payload.body);
