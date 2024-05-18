@@ -7,7 +7,6 @@ CREATE TYPE user_role as ENUM ('MANAGER','USER');
 CREATE CAST (varchar AS user_role) WITH INOUT AS IMPLICIT;
 
 
-
 CREATE TABLE IF NOT EXISTS public.users
 (
     id bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
@@ -63,7 +62,7 @@ CREATE TABLE IF NOT EXISTS public.messages
     ticket_id bigint NOT NULL,
     user_id bigint NOT NULL,
     message character varying NOT NULL,
-    created time without time zone NOT NULL,
+    created timestamp without time zone NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -158,6 +157,7 @@ ALTER TABLE IF EXISTS public.services_users
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID;
+
 
 
 CREATE OR REPLACE FUNCTION add_created_and_modified()

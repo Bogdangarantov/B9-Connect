@@ -72,10 +72,10 @@ body {
     box-shadow: 5px 11px 5px #0000008a;
 }
 .accordion-button{
-    color: #EDBB0B!important;
+    color: #000000cf !important
 }
 .accordion-body{
-    color: #EDBB0B!important;
+    color: #000000cf !important;
 }
 .accordion-button,.accordion-item,.accordion-header,.accordion-body{
     background-color: rgba(175, 139, 10)!important;
