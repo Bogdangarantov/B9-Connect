@@ -1,5 +1,5 @@
 .card {
-    background: #fff;
+    background-color: #ffa500a8 !important;
     transition: .5s;
     border: 0;
     margin-bottom: 30px;
@@ -8,6 +8,7 @@
     width: 100%;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
 }
+
 .chat-app .people-list {
     width: 280px;
     position: absolute;
@@ -22,7 +23,7 @@
 }
 .chat-app .chat {
     margin-left: 280px;
-    border-left: 1px solid #eaeaea;
+    border-left: 1px solid rgba(234, 234, 234, 0.45);
     min-height: 40rem;
     align-content: end;
 
@@ -42,16 +43,17 @@
 }
 
 .people-list .chat-list li:hover {
-    background: #efefef;
+    background: rgba(239, 239, 239, 0.49);
     cursor: pointer
 }
 
 .people-list .chat-list li.active {
-    background: #efefef
+    background: rgba(239, 239, 239, 0.49);
 }
 
 .people-list .chat-list li .name {
-    font-size: 15px
+    font-size: 15px;
+    color:#fff
 }
 
 .people-list .chat-list img {
@@ -69,10 +71,7 @@
     padding-left: 8px
 }
 
-.people-list .status {
-    color: #999;
-    font-size: 13px
-}
+
 
 .chat .chat-header {
     padding: 15px 20px;
@@ -92,7 +91,7 @@
 
 .chat .chat-history {
     padding: 20px;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid rgba(234, 234, 234, 0.45);
     overflow: auto;
     max-height: 35rem;
 }
@@ -121,7 +120,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: rgba(241, 241, 241, 0.51);
     border-radius: 10px;
 }
 
@@ -148,12 +147,17 @@
     height: 0
 }
 
+.form-control{
+    border-radius: 15px !important;
+    background-color: #ffffff6b !important;
+    border: 0 solid transparent !important;
+}
 @media only screen and (max-width: 767px) {
     .chat-app .people-list {
         height: 465px;
         width: 100%;
         overflow-x: auto;
-        background: #fff;
+        background: rgba(255, 255, 255, 0.45);
         left: -400px;
         display: none
     }

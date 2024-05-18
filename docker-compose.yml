@@ -1,0 +1,32 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - ${DB_DATA_PATH}:/var/lib/postgresql/data
+    ports:
+      - ${DB_HOST_PORT}:${DB_DOCKER_INTERNAL_PORT}
+
+  app:
+    image: maven:3.8.4-openjdk-17
+    volumes:
+      - ./:/app
+    ports:
+      - "${ElnHostPort}:${ElnHostPort}"
+    working_dir: /app
+    command: >
+      bash -c "
+      while ! timeout 1 bash -c 'echo > /dev/tcp/db/${DB_DOCKER_INTERNAL_PORT}'; do
+        echo 'Waiting for Postgres service to start...';
+        sleep 1;
+      done;
+      mvn clean install &&
+      java -jar target/B9-Connect-0.0.1-RELEASE.jar"
+    environment:
+      - POSTGRESQL_DB_LINK=db:${DB_DOCKER_INTERNAL_PORT}/${DB_NAME}
+    depends_on:
+      - db

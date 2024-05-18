@@ -34,12 +34,6 @@ public class ChatController {
 
     private final EntityManager entityManager;
     private Map<Long, List<ChatUserTO>> chatUsersMap = new HashMap<>();
-
-    //    @MessageMapping("/chat.sendMessage")
-//    @SendTo("/topic/public")
-//    public Message sendMessage(@Payload Message message) {
-//        return message;
-//    }
     @MessageMapping("/chat/{chatId}/sendMessage")
     @SendTo("/topic/{chatId}")
     @Transactional
@@ -51,17 +45,6 @@ public class ChatController {
         Message msg =messageService.addMessage(chatId,message);
         return msg;
     }
-
-    //    @MessageMapping("/chat/{chatId}/addUser")
-//    @SendTo("/topic/public")
-//    public ChatUserTO addUser(@Payload ChatUserTO chatUserTO,
-//                              SimpMessageHeaderAccessor headerAccessor,
-//                              @DestinationVariable String chatId) {
-//        // Add username in web socket session
-//
-//        Objects.requireNonNull(headerAccessor.getSessionAttributes()).put("username", chatMessage.getSender());
-//        return chatUserTO;
-//    }
     @MessageMapping("/chat/{chatId}/addUser")
     @SendTo("/topic/{chatId}")
     public void addUser(@Payload ChatUserTO chatUserTO,

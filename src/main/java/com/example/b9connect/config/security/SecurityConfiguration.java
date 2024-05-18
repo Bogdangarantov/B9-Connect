@@ -38,7 +38,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/css/**", "/js/**", "/img/**")
                         .permitAll()
-                        .requestMatchers(HttpMethod.GET,  "/chat","/ws/**","/ws","/","/services","/support","/faq","/newTicket","/chats","/user","/api/v1/services/**","/api/v1/users/**")
+                        .requestMatchers(HttpMethod.GET,  "/chat","/ws/**","/ws","/","/services","/support","/faq","/newTicket","/chats","/user","/reports","/api/v1/services/**","/api/v1/users/**")
                         .authenticated()
                         .requestMatchers(HttpMethod.POST, "/logout")
                         .authenticated()

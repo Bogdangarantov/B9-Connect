@@ -21,14 +21,32 @@
 }
 
 .message span {
-    color: #333;
+    color: #ffffff;
     font-weight: 600;
 }
 
 .message p {
-    color: #43464b;
+    color: #ffffff;
+    margin-bottom: 0!important;
 }
 
 .chat-message{
     padding: 1rem;
+}
+.send-btn{
+    border:0 solid transparent!important;
+    background-color: transparent!important;
+}
+.date-time{
+    text-align: right;
+    color: white!important;
+    font-size: 12px!important;
+    font-weight: 400!important;
+}
+.message{
+    border-radius: 5px;
+    padding-right: 1rem;
+}
+.message:hover{
+    background-color: rgba(0, 0, 0, 0.28);
 }

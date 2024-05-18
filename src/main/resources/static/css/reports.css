@@ -31,26 +31,43 @@ body {
     font-size: 40px;
     color:rgba(0, 0, 0, 0.48) ;
 }
-.full-page-logo{
-    padding: 12rem;
-    text-align: center;
-    justify-content: center;
-    display: flex;
-    height: 100%;
-}
 .dropdown-menu[data-bs-popper]{
     left: -8rem!important;
 }
-.full-page-logo-text{
-    font-weight: 400;
-    font-size: 17vw;
-    background-color: #EDBB0B;
-    /*background-color: #565656;*/
-    color: transparent;
-    text-shadow: 5px 0px 15px rgba(0, 0, 0, 0.5);
-    -webkit-background-clip: text;
-    background-clip: text;
+.dropdown-menu{
+    position: absolute!important;
 }
+.nav-container{
+    justify-content: center;
+    display: flex;
+}
+.service-name{
+    color: white;
+}
+.main-container{
+    margin-top: 7rem;
+}
+
+thead *{
+    background-color: #AF8B0A!important;
+    border-radius: 20px;
+    border: 0 solid transparent!important;
+}
+
+tbody *{
+    background-color: #AF8B0A!important;
+    border-radius: 20px;
+    border: 0 solid transparent!important;
+}
+table{
+    border-radius: 15px;
+    border-collapse: separate!important;
+    border-spacing: 0px 8px!important;
+}
+table td,table th{
+    text-align: center;
+}
+
 
 ::-webkit-scrollbar {
     width: 6px;

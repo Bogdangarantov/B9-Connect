@@ -99,44 +99,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col block-user-container">
-                    <div>
-                        <div class="block-user-content row">
-                            <div class="block-user-title">
-                                <h1>Block User</h1>
-                            </div>
-                            <div class="block-user-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <select class="block-select" v-model="blockUser.id">
-                                            <option v-for="(us,index) in allUsers" :value="us.id">{{us.name}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <button class="block-user-button" type="submit">Create</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="unblock-user-content row">
-                            <div class="unblock-user-title">
-                                <h1>UnBlock User</h1>
-                            </div>
-                            <div class="unblock-user-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <select class="unblock-select" v-model="unBlockUser.id">
-                                            <option v-for="(us,index) in allUsers" :value="us.id">{{us.name}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <button class="unblock-user-button" type="submit">Create</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <div class="col create-service-form-div">

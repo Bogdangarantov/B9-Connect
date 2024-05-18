@@ -10,7 +10,11 @@ let app = new Vue({
         stompClient: null,
         messages: [],
         socket: null,
-        chatMessage:""
+        chatMessage: "",
+        colors: [
+            '#2196F3', '#32c787', '#00BCD4', '#ff5652',
+            '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
+        ]
 
     },
     methods: {
@@ -43,16 +47,16 @@ let app = new Vue({
         async setCurrentChat(chat, index) {
             console.log("set")
             this.currentChat = chat
-            this.messages = this.currentChat.ticketMessages
+            this.messages = this.sortDates(this.currentChat.ticketMessages)
             console.log(this.currentChat)
             this.chats.forEach(chat => chat.active = false)
             this.chats[index].active = true
-            if (this.stompClient!==null){
+            if (this.stompClient !== null) {
                 await this.stompClient.disconnect()
                 await this.connect(chat.id)
 
 
-            }else{
+            } else {
                 await this.connect(chat.id)
             }
 
@@ -63,6 +67,21 @@ let app = new Vue({
         async sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         },
+        formatDate(isoString) {
+            let date = new Date(isoString);
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+            day = day < 10 ? '0' + day : day;
+            month = month < 10 ? '0' + month : month;
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            return day + '-' + month + '-' + year + ' ' + hours + ':' + minutes + ':' + seconds;
+        },
         getActive(index) {
             if (this.chats[index].active) {
                 return "active"
@@ -72,7 +91,7 @@ let app = new Vue({
         },
         scrollDown() {
             let chatHistory = document.getElementById("chat-history")
-            chatHistory.scrollTo(0, document.body.scrollHeight)
+            chatHistory.scrollTo(0, chatHistory.scrollHeight)
         },
         async getChatHistory() {
 
@@ -94,17 +113,17 @@ let app = new Vue({
             this.stompClient.connect({}, this.onConnected, this.onError);
         },
         onConnected() {
-            // Subscribe to the Public Topic
-            this.stompClient.subscribe('/topic/'+this.currentChat.id, this.onMessageReceived);
-
-            // Tell your username to the server
-            this.stompClient.send("/app/chat/"+this.currentChat.id+"/addUser",
+            this.stompClient.subscribe('/topic/' + this.currentChat.id, this.onMessageReceived);
+            this.stompClient.send("/app/chat/" + this.currentChat.id + "/addUser",
                 {},
                 JSON.stringify({
-                    id:this.user.id,
-                    name:this.user.name
+                    id: this.user.id,
+                    name: this.user.name
                 })
             )
+        },
+        sortDates(dates) {
+            return dates.sort((a, b) => new Date(a.created) - new Date(b.created));
         },
         onError(error) {
             connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
@@ -114,57 +133,27 @@ let app = new Vue({
             event.preventDefault();
             if (this.chatMessage && this.stompClient) {
                 let chatMessage = {
-                    user_id:this.user.id,
-                    message:this.chatMessage
+                    user_id: this.user.id,
+                    message: this.chatMessage
                 };
-                this.stompClient.send("/app/chat/"+this.currentChat.id+"/sendMessage", {}, JSON.stringify(chatMessage));
+                this.stompClient.send("/app/chat/" + this.currentChat.id + "/sendMessage", {}, JSON.stringify(chatMessage));
                 this.chatMessage = ""
             }
         },
         onMessageReceived(payload) {
             let message = JSON.parse(payload.body);
-            console.log("NEW MESSAGE")
-            console.log(message)
             this.messages.push(message)
-            // var messageElement = document.createElement('li');
-            //
-            // if (message.type === 'JOIN') {
-            //     messageElement.classList.add('event-message');
-            //     message.content = message.sender + ' joined!';
-            // } else if (message.type === 'LEAVE') {
-            //     messageElement.classList.add('event-message');
-            //     message.content = message.sender + ' left!';
-            // } else {
-            //     messageElement.classList.add('chat-message');
-            //
-            //     var avatarElement = document.createElement('i');
-            //     var avatarText = document.createTextNode(message.sender[0]);
-            //     avatarElement.appendChild(avatarText);
-            //     avatarElement.style['background-color'] = getAvatarColor(message.sender);
-            //
-            //     messageElement.appendChild(avatarElement);
-            //
-            //     var usernameElement = document.createElement('span');
-            //     var usernameText = document.createTextNode(message.sender);
-            //     usernameElement.appendChild(usernameText);
-            //     messageElement.appendChild(usernameElement);
-            // }
-            // var textElement = document.createElement('p');
-            // var messageText = document.createTextNode(message.content);
-            // textElement.appendChild(messageText);
-            //
-            // messageElement.appendChild(textElement);
-            //
-            // messageArea.appendChild(messageElement);
-            // messageArea.scrollTop = messageArea.scrollHeight;
+            const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
+            sleep(100).then(this.scrollDown)
         },
-        async getAvatarColor(messageSender) {
+        getAvatarColor(messageSender) {
             let hash = 0;
             for (let i = 0; i < messageSender.length; i++) {
                 hash = 31 * hash + messageSender.charCodeAt(i);
             }
-            let index = Math.abs(hash % colors.length);
-            return colors[index];
+            let index = Math.abs(hash % this.colors.length);
+            console.log(this.colors[index])
+            return this.colors[index];
         },
     },
     async created() {
