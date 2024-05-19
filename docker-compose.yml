@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     volumes:
-      - ${DB_DATA_PATH}:/DockerDataB9
+      - ${DB_DATA_PATH}:/root/DockerDataB9
     ports:
       - ${DB_HOST_PORT}:${DB_DOCKER_INTERNAL_PORT}
 
