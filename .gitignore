@@ -34,3 +34,11 @@ build/
 .vscode/
 /src/main/resources/application.properties
 .mvn
+cert.p12
+cert.pem
+package-lock.json
+package.json
+privkey.pem
+README
+chain.pem
+.env
